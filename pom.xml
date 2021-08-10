@@ -21,6 +21,8 @@
     <logback-classic.version>1.2.5</logback-classic.version>
     <testng.version>7.4.0</testng.version>
     <assertj-core.version>3.20.2</assertj-core.version>
+    <allure.version>2.13.2</allure.version>
+    <aspectj.version>1.9.5</aspectj.version>
   </properties>
 
   <build>
@@ -62,10 +64,21 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M5</version>
         <configuration>
+          <argLine>
+            --illegal-access=permit
+            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+          </argLine>
           <suiteXmlFiles>
             <suiteXmlFile>${testng.suite.file}</suiteXmlFile>
           </suiteXmlFiles>
         </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
   </build>
@@ -81,7 +94,7 @@
       <id>Selenium-lesson1-allTests</id>
       <activation>
         <!-- If no profile is selected explicitly, then this profile is activated -->
-        <activeByDefault>true</activeByDefault>
+        <!--<activeByDefault>true</activeByDefault>-->
       </activation>
       <properties>
         <testng.suite.file>${testng.configs.path}/lesson1.utils.allTests.xml</testng.suite.file>
@@ -103,6 +116,15 @@
       <id>Selenium-lesson1-progressiveTaxTests</id>
       <properties>
         <testng.suite.file>${testng.configs.path}/lesson1.utils.progressiveTaxTests.xml</testng.suite.file>
+      </properties>
+    </profile>
+    <profile>
+      <id>Selenium-lesson4</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <testng.suite.file>${testng.configs.path}/lesson4.class.suite.xml</testng.suite.file>
       </properties>
     </profile>
   </profiles>
@@ -135,5 +157,30 @@
       <version>${assertj-core.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-testng</artifactId>
+      <version>${allure.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>3.141.59</version>
+    </dependency>
   </dependencies>
+
+  <reporting>
+    <excludeDefaults>true</excludeDefaults>
+    <plugins>
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version>2.10.0</version>
+        <configuration>
+          <reportVersion>${allure.version}</reportVersion>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+
 </project>
