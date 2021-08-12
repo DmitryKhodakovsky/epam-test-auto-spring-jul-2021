@@ -21,8 +21,11 @@
     <logback-classic.version>1.2.5</logback-classic.version>
     <testng.version>7.4.0</testng.version>
     <assertj-core.version>3.20.2</assertj-core.version>
-    <allure.version>2.13.2</allure.version>
+    <allure.version>2.14.0</allure.version>
     <aspectj.version>1.9.5</aspectj.version>
+    <selenium.version>3.141.59</selenium.version>
+    <webdrivermanager.version>4.4.3</webdrivermanager.version>
+    <cucumber.version>6.11.0</cucumber.version>
   </properties>
 
   <build>
@@ -127,6 +130,24 @@
         <testng.suite.file>${testng.configs.path}/lesson4.class.suite.xml</testng.suite.file>
       </properties>
     </profile>
+    <profile>
+      <id>Selenium-lesson5-pure-java</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <testng.suite.file>${testng.configs.path}/lesson5.pure.java.suite.xml</testng.suite.file>
+      </properties>
+    </profile>
+    <profile>
+      <id>Selenium-lesson5-cucumber</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <testng.suite.file>${testng.configs.path}/lesson5.cucumber.suite.xml</testng.suite.file>
+      </properties>
+    </profile>
   </profiles>
 
   <dependencies>
@@ -165,7 +186,30 @@
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
-      <version>3.141.59</version>
+      <version>${selenium.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.github.bonigarcia</groupId>
+      <artifactId>webdrivermanager</artifactId>
+      <version>${webdrivermanager.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-testng</artifactId>
+      <version>${cucumber.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-java</artifactId>
+      <version>${cucumber.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-cucumber6-jvm</artifactId>
+      <version>${allure.version}</version>
     </dependency>
   </dependencies>
 
