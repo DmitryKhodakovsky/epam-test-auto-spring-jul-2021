@@ -83,6 +83,23 @@
           </dependency>
         </dependencies>
       </plugin>
+
+<!--      <plugin>-->
+<!--        <groupId>io.qameta.allure</groupId>-->
+<!--        <artifactId>allure-maven</artifactId>-->
+<!--        <version>2.10.0</version>-->
+<!--        <configuration>-->
+<!--          <reportVersion>${allure.version}</reportVersion>-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <phase>test</phase>-->
+<!--            <goals>-->
+<!--              <goal>report</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
     </plugins>
   </build>
 
@@ -146,6 +163,15 @@
       </activation>
       <properties>
         <testng.suite.file>${testng.configs.path}/lesson5.cucumber.suite.xml</testng.suite.file>
+      </properties>
+    </profile>
+    <profile>
+      <id>Selenium-lesson6-selenium-grid</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <testng.suite.file>${testng.configs.path}/lesson6.selenium.grid.suite.xml</testng.suite.file>
       </properties>
     </profile>
   </profiles>
